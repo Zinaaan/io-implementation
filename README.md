@@ -2,6 +2,7 @@
 The Implementation of Blocking IO, Non-blocking IO and Netty
 ## BIO-V1
 ![image](https://github.com/Zinaaan/io-implementation/assets/39329676/39781b8d-e7db-43c0-aad7-7b449381d93a)
+
 The server only use one thread to receive and handle client sockets. If current socket is still in processing, the subsequent socket will be blocked.
 
 ## BIO-V2
