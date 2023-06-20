@@ -1,6 +1,6 @@
-package netty;
+package netty.base;
 
-import netty.server.DiscardServer;
+import netty.base.server.DiscardServer;
 
 /**
  * @author lzn

@@ -1,4 +1,4 @@
-package netty.server;
+package netty.base.server;
 
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;
@@ -8,7 +8,7 @@ import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
-import netty.handler.DiscardServerHandler;
+import netty.base.handler.DiscardServerHandler;
 
 /**
  * @author lzn
