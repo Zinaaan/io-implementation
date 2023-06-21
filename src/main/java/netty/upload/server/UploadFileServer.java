@@ -1,4 +1,4 @@
-package netty.base.server;
+package netty.upload.server;
 
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;
@@ -8,18 +8,19 @@ import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
-import netty.base.handler.DiscardServerHandler;
+import netty.upload.handler.UploadFileHandler;
+import netty.upload.mydecoder.UploadFileDecoder;
 
 /**
  * @author lzn
  * @date 2023/06/18 22:24
- * @description Netty server
+ * @description File upload Netty server
  */
-public class DiscardServer {
+public class UploadFileServer {
 
     private final int port;
 
-    public DiscardServer(int port) {
+    public UploadFileServer(int port) {
         this.port = port;
     }
 
@@ -37,7 +38,8 @@ public class DiscardServer {
 
                         @Override
                         protected void initChannel(SocketChannel socketChannel) throws Exception {
-                            socketChannel.pipeline().addLast(new DiscardServerHandler());
+                            socketChannel.pipeline().addLast(new UploadFileDecoder());
+                            socketChannel.pipeline().addLast(new UploadFileHandler());
                         }
                     })
                     .option(ChannelOption.SO_BACKLOG, 128)
