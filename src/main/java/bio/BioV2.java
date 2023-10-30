@@ -1,5 +1,7 @@
 package bio;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -21,15 +23,16 @@ import java.net.Socket;
  * New-2:
  * The server will create a thread pool to reduce the overhead of thread creation and destruction.
  */
+@Slf4j
 public class BioV2 {
 
     public static void main(String[] args) {
         try {
             ServerSocket serverSocket = new ServerSocket(9001);
             while (true) {
-                System.out.println("Waiting for client connection..............");
+                log.info("Waiting for client connection..............");
                 Socket clientSocket = serverSocket.accept();
-                System.out.println("Connection established...");
+                log.info("Connection established...");
 
                 new Thread(() -> {
                     try {
@@ -53,12 +56,12 @@ public class BioV2 {
      */
     private static void handler(Socket clientSocket) {
         byte[] bytes = new byte[1024];
-        System.out.println("Start reading.........");
+        log.info("Start reading.........");
         try {
             int read = clientSocket.getInputStream().read();
-            System.out.println("Finished reading.........");
+            log.info("Finished reading.........");
             if (read != -1) {
-                System.out.println("Received the client data: " + new String(bytes, 0, read));
+                log.info("Received the client data: " + new String(bytes, 0, read));
             }
         } catch (IOException e) {
             e.printStackTrace();

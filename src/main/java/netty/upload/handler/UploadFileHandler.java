@@ -2,6 +2,7 @@ package netty.upload.handler;
 
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
+import lombok.extern.slf4j.Slf4j;
 import netty.upload.FileDTO;
 
 import java.io.*;
@@ -11,11 +12,12 @@ import java.io.*;
  * @date 2023/06/18 22:42
  * @description File upload server handler
  */
+@Slf4j
 public class UploadFileHandler extends ChannelInboundHandlerAdapter {
 
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
-        System.out.println("client connected.........");
+        log.info("client connected.........");
     }
 
     @Override

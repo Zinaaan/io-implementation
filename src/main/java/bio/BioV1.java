@@ -1,5 +1,7 @@
 package bio;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -12,15 +14,16 @@ import java.net.Socket;
  * The server only use one thread to receive and handle client sockets.
  * If current socket is still in processing, the subsequent socket will be blocked, and access to process until the current socket completed.
  */
+@Slf4j
 public class BioV1 {
 
     public static void main(String[] args) {
         try {
             ServerSocket serverSocket = new ServerSocket(9001);
 
-            System.out.println("Waiting for client connection..............");
+            log.info("Waiting for client connection..............");
             Socket clientSocket = serverSocket.accept();
-            System.out.println("Connection established...");
+            log.info("Connection established...");
             handler(clientSocket);
         } catch (IOException e) {
             e.printStackTrace();
@@ -34,12 +37,12 @@ public class BioV1 {
      */
     private static void handler(Socket clientSocket) {
         byte[] bytes = new byte[1024];
-        System.out.println("Start reading.........");
+        log.info("Start reading.........");
         try {
             int read = clientSocket.getInputStream().read();
-            System.out.println("Finished reading.........");
+            log.info("Finished reading.........");
             if(read != -1){
-                System.out.println("Received the client data: " + new String(bytes, 0, read));
+                log.info("Received the client data: " + new String(bytes, 0, read));
             }
         } catch (IOException e) {
             e.printStackTrace();

@@ -8,6 +8,7 @@ import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
+import lombok.extern.slf4j.Slf4j;
 import netty.upload.handler.UploadFileHandler;
 import netty.upload.mydecoder.UploadFileDecoder;
 
@@ -16,6 +17,7 @@ import netty.upload.mydecoder.UploadFileDecoder;
  * @date 2023/06/18 22:24
  * @description File upload Netty server
  */
+@Slf4j
 public class UploadFileServer {
 
     private final int port;
@@ -46,7 +48,7 @@ public class UploadFileServer {
                     .childOption(ChannelOption.SO_KEEPALIVE, true);
 
             // Bind and start to accept incoming connections.
-            System.out.println("tcp start success");
+            log.info("tcp start success");
             ChannelFuture f = b.bind(port).sync();
 
             // Wait until the server socket is closed.

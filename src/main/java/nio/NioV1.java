@@ -1,5 +1,7 @@
 package nio;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.nio.ByteBuffer;
@@ -14,6 +16,7 @@ import java.util.List;
  * @date 2023/06/18 17:11
  * @description The origin implementation of NIO (Non-blocking IO)
  */
+@Slf4j
 public class NioV1 {
 
     /**
@@ -27,7 +30,7 @@ public class NioV1 {
             serverSocketChannel.socket().bind(new InetSocketAddress(9001));
             // Set the ServerSocketChannel to non-blocking
             serverSocketChannel.configureBlocking(false);
-            System.out.println("Server started successful...........");
+            log.info("Server started successful...........");
 
             while (true) {
                 // Won't block because current mode is non-blocking
@@ -35,7 +38,7 @@ public class NioV1 {
                 SocketChannel socketChannel = serverSocketChannel.accept();
                 // If has client connected
                 if (socketChannel != null) {
-                    System.out.println("Connection established.............");
+                    log.info("Connection established.............");
                     socketChannel.configureBlocking(false);
                     CHANNEL_LIST.add(socketChannel);
                 }
@@ -47,11 +50,11 @@ public class NioV1 {
                     int length = sc.read(byteBuffer);
                     // If the client send some messages
                     if (length > 0) {
-                        System.out.println(Thread.currentThread().getName() + " received message：" + new String(byteBuffer.array()));
+                        log.info(Thread.currentThread().getName() + " received message：" + new String(byteBuffer.array()));
                     } else if (length == -1) {
                         // If the client has been disconnected, remove the current socket from collections
                         iterator.remove();
-                        System.out.println("Connection has been disconnected............");
+                        log.info("Connection has been disconnected............");
                     }
                 }
             }

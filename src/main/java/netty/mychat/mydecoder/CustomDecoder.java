@@ -3,6 +3,7 @@ package netty.mychat.mydecoder;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.codec.ByteToMessageDecoder;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.List;
 
@@ -13,6 +14,7 @@ import java.util.List;
  * <p>
  * data format: length + data, eg: 41234
  */
+@Slf4j
 public class CustomDecoder extends ByteToMessageDecoder {
 
     @Override
@@ -40,6 +42,6 @@ public class CustomDecoder extends ByteToMessageDecoder {
 
         // Mark the read index in order to the next reading process
         byteBuf.markReaderIndex();
-        System.out.println(new String(bytes));
+        log.info(new String(bytes));
     }
 }
